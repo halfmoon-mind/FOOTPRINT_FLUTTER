@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.footprint_flutter">
+    package="com.example.footprint_">
    <application
-        android:label="footprint_flutter"
+        android:label="footprint_"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

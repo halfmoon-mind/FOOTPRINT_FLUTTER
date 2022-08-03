@@ -1,6 +1,6 @@
-# footprint_flutter
+# footprint_
 
-발자국 프로젝트
+A new Flutter project.
 
 ## Getting Started
 
