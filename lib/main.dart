@@ -1,7 +1,12 @@
+import 'package:FOOTPRINT_FLUTTER/screens/screens_search.dart';
 import 'package:FOOTPRINT_FLUTTER/tabs/tabs_feed.dart';
 import 'package:FOOTPRINT_FLUTTER/tabs/tabs_myrecord.dart';
+import 'package:FOOTPRINT_FLUTTER/tabs/tabs_name.dart';
 import 'package:flutter/material.dart';
 import 'package:FOOTPRINT_FLUTTER/screens/screens_index.dart';
+import 'package:FOOTPRINT_FLUTTER/screens/screens_login.dart';
+import 'package:FOOTPRINT_FLUTTER/screens/screens_splash.dart';
+import 'package:FOOTPRINT_FLUTTER/screens/screens_register.dart';
 
 void main() {
   runApp(MyApp());
@@ -20,11 +25,15 @@ class MyApp extends StatelessWidget {
       ),
       routes: {
         '/index': (context) => IndexScreen(),
-        // '/feed': (context) => FeedTab(),
+        //'/home': (context) => NameTab(),
         // '/footprint': (context) => MyrecodeTab(),
         //'/my': (context) => ProfileTab()
+        '/': (context) => SplashScreen(),
+        '/login': (context) => LoginScreen(),
+        '/register': (context) => RegisterScreen(),
+        '/search': (context) => SearchScreen()
       },
-      initialRoute: '/index',
+      initialRoute: '/',
     );
   }
 }

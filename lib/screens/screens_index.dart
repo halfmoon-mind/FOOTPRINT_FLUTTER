@@ -10,7 +10,7 @@ class IndexScreen extends StatefulWidget {
 }
 
 class _IndexScreenState extends State<IndexScreen> {
-  int _currentIndex = 0;
+  int _currentIndex = 1;
   final List<Widget> _tabs = [
     MyrecodeTab(),
     NameTab(),
@@ -35,7 +35,7 @@ class _IndexScreenState extends State<IndexScreen> {
           children: <Widget>[
             UserAccountsDrawerHeader(
               currentAccountPicture: CircleAvatar(
-                backgroundImage: AssetImage(''),
+                backgroundImage: AssetImage('basic_profile.png'),
                 backgroundColor: Colors.white,
               ),
               accountName: Text('Name Example'),
