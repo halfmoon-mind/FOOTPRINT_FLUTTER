@@ -8,7 +8,12 @@ import 'package:FOOTPRINT_FLUTTER/screens/screens_login.dart';
 import 'package:FOOTPRINT_FLUTTER/screens/screens_splash.dart';
 import 'package:FOOTPRINT_FLUTTER/screens/screens_register.dart';
 
-void main() {
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+
+void main() async {
+  await Hive.initFlutter();
+  await Hive.openBox('oneDayData');
   runApp(MyApp());
 }
 
