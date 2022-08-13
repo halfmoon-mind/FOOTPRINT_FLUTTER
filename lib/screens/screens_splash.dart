@@ -22,8 +22,8 @@ class _SplashScreenState extends State<SplashScreen> {
     await checkLogin().then((isLogin) {
       if (isLogin) {
         Navigator.of(context).pushReplacementNamed('/index');
-      } else {
-        Navigator.of(context).pushReplacementNamed('/login');
+        // } else {
+        //   Navigator.of(context).pushReplacementNamed('/login');
       }
     });
   }
@@ -31,7 +31,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Timer(Duration(milliseconds: 7000), () {
+    Timer(Duration(milliseconds: 3000), () {
       moveScreen();
     });
   }

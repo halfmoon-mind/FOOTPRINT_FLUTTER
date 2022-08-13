@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
         '/register': (context) => RegisterScreen(),
         '/search': (context) => SearchScreen()
       },
-      initialRoute: '/',
+      initialRoute: '/index',
     );
   }
 }
