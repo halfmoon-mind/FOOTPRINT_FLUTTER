@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "604010493325",
+    "project_id": "footprint-abd15",
+    "storage_bucket": "footprint-abd15.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:604010493325:android:20ac09ccca461769ad79c4",
+        "android_client_info": {
+          "package_name": "com.example.footprint_"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "604010493325-dlkhmobavpq7obsign7e0rcerdtsg6ca.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAs0jNgVH4Rld3yClJm6IcBFqP_wZaBKiA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "604010493325-dlkhmobavpq7obsign7e0rcerdtsg6ca.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
