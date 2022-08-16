@@ -13,6 +13,7 @@ class RegisterScreen extends StatelessWidget {
       body: Column(
         children: [
           EmailInput(),
+          NicknameInput(),
           PasswordInput(),
           PasswordConfirmInput(),
           RegisterButton()
@@ -30,7 +31,23 @@ class EmailInput extends StatelessWidget {
       child: TextField(
         onChanged: (email) {},
         keyboardType: TextInputType.emailAddress,
-        decoration: InputDecoration(labelText: '이메일', helperText: ''),
+        decoration: InputDecoration(
+            labelText: '이메일', helperText: '', hintText: '이메일을 입력하세요'),
+      ),
+    );
+  }
+}
+
+class NicknameInput extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.fromLTRB(20, 5, 20, 5),
+      child: TextField(
+        onChanged: (context) {},
+        keyboardType: TextInputType.name,
+        decoration: InputDecoration(
+            labelText: '닉네임', helperText: '', hintText: '닉네임을 입력하세요'),
       ),
     );
   }
@@ -43,8 +60,10 @@ class PasswordInput extends StatelessWidget {
       padding: EdgeInsets.fromLTRB(20, 5, 20, 5),
       child: TextField(
         onChanged: (password) {},
+        keyboardType: TextInputType.visiblePassword,
         obscureText: true, //비밀번호 그대로 보이는거 방지
-        decoration: InputDecoration(labelText: '비밀번호', helperText: ''),
+        decoration: InputDecoration(
+            labelText: '비밀번호', helperText: '', hintText: '비밀번호를 입력하세요'),
       ),
     );
   }
@@ -57,11 +76,10 @@ class PasswordConfirmInput extends StatelessWidget {
       padding: EdgeInsets.fromLTRB(20, 5, 20, 5),
       child: TextField(
         onChanged: (password) {},
+        keyboardType: TextInputType.visiblePassword,
         obscureText: true,
         decoration: InputDecoration(
-          labelText: '비밀번호 확인',
-          helperText: '',
-        ),
+            labelText: '비밀번호 확인', helperText: '', hintText: '비밀번호를 재입력하세요'),
       ),
     );
   }

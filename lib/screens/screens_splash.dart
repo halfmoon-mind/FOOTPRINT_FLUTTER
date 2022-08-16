@@ -22,9 +22,10 @@ class _SplashScreenState extends State<SplashScreen> {
     await checkLogin().then((isLogin) {
       if (isLogin) {
         Navigator.of(context).pushReplacementNamed('/index');
-        // } else {
-        //   Navigator.of(context).pushReplacementNamed('/login');
       }
+      //  else {
+      //   Navigator.of(context).pushReplacementNamed('/login');
+      // }
     });
   }
 

@@ -1,7 +1,7 @@
 import 'package:FOOTPRINT_FLUTTER/screens/screens_search.dart';
 import 'package:FOOTPRINT_FLUTTER/tabs/tabs_feed.dart';
 import 'package:FOOTPRINT_FLUTTER/tabs/tabs_myrecord.dart';
-import 'package:FOOTPRINT_FLUTTER/tabs/tabs_name.dart';
+import 'package:FOOTPRINT_FLUTTER/tabs/tabs_home.dart';
 import 'package:flutter/material.dart';
 import 'package:FOOTPRINT_FLUTTER/screens/screens_index.dart';
 import 'package:FOOTPRINT_FLUTTER/screens/screens_login.dart';
