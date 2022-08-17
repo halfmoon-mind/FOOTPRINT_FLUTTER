@@ -3,12 +3,12 @@ description: A new Flutter project.
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
 version: 1.0.0+1
 
 environment:
-  sdk: '>=2.17.3 <3.0.0'
+  sdk: ">=2.17.3 <3.0.0"
 
 dependencies:
   flutter:
@@ -51,6 +51,8 @@ flutter:
     - basic_profile.png
     - splashscreen_icon.png
     - splashscreen_text.png
+    - example_image.png
+    - example_footprint.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
