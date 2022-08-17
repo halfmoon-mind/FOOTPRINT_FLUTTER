@@ -1,4 +1,4 @@
-import 'package:FOOTPRINT_FLUTTER/models/inDB/location.dart';
+import 'package:FOOTPRINT_FLUTTER/models/inDB/location_model.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:FOOTPRINT_FLUTTER/models/inDB/oneDayData.dart';
 

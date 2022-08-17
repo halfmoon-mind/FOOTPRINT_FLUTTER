@@ -8,7 +8,7 @@ part of 'oneDayData.dart';
 
 class oneDayDataAdapter extends TypeAdapter<oneDayData> {
   @override
-  final int typeId = 0;
+  final int typeId = 1;
 
   @override
   oneDayData read(BinaryReader reader) {
@@ -18,7 +18,7 @@ class oneDayDataAdapter extends TypeAdapter<oneDayData> {
     };
     return oneDayData(
       (fields[0] as Map).map((dynamic k, dynamic v) =>
-          MapEntry(k as DateTime, (v as List).cast<Location>())),
+          MapEntry(k as DateTime, (v as List).cast<LocationModel>())),
     );
   }
 
