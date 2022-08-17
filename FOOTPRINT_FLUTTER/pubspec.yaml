@@ -1,0 +1,44 @@
+name: FOOTPRINT_FLUTTER
+description: A new Flutter project.
+
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=2.17.3 <3.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  shared_preferences: ^2.0.6
+  firebase_core: ^1.0.1
+  cloud_firestore: ^2.2.2
+  firebase_auth: ^1.4.1
+  provider: ^5.0.0
+  cupertino_icons: ^1.0.2
+  background_locator_2: ^2.0.5
+  hive:
+  hive_flutter:
+  location:
+    path: ../
+  json_annotation: ^4.5.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  hive_generator: ^1.1.1
+  build_runner:
+  json_serializable:
+
+  flutter_lints: ^2.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - basic_profile.png
+    - splashscreen_icon.png
+    - splashscreen_text.png
+    - example_image.png
+    - example_footprint.png
