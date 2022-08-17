@@ -13,22 +13,25 @@ class RegisterScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          '회원가입',
-          style: TextStyle(fontSize: 18, color: Colors.black54),
+        appBar: AppBar(
+          title: Text(
+            '회원가입',
+            style: TextStyle(fontSize: 18, color: Colors.black54),
+          ),
         ),
-      ),
-      body: Column(
-        children: [
-          EmailInput(),
-          NicknameInput(),
-          PasswordInput(),
-          PasswordConfirmInput(),
-          RegisterButton()
-        ],
-      ),
-    );
+        body: SingleChildScrollView(
+          child: Expanded(
+            child: Column(
+              children: [
+                EmailInput(),
+                NicknameInput(),
+                PasswordInput(),
+                PasswordConfirmInput(),
+                RegisterButton()
+              ],
+            ),
+          ),
+        ));
   }
 }
 
@@ -114,12 +117,36 @@ class RegisterButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(30.0),
           ),
         ),
-        onPressed: () {
-          ScaffoldMessenger.of(context)
-            ..hideCurrentSnackBar()
-            ..showSnackBar(SnackBar(content: Text('회원가입이 완료되었습니다!')));
-          Navigator.pop(context);
+        // onPressed: () {
+        //   ScaffoldMessenger.of(context)
+        //     ..hideCurrentSnackBar()
+        //     ..showSnackBar(SnackBar(content: Text('회원가입이 완료되었습니다!')));
+        //   Navigator.pop(context);
+        // },
+        onPressed: () async {
+          try {
+            UserCredential userCredential = await FirebaseAuth.instance
+                .createUserWithEmailAndPassword(
+                    email: email, password: password);
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text('회원가입이 완료되었습니다!'),
+              ),
+            );
+
+            CollectionReference users =
+                FirebaseFirestore.instance.collection('user');
+            users.doc(email).set(({
+                  'uid': userCredential.user!.uid,
+                  'email': email,
+                  'id': id,
+                  'nickname': nickname,
+                }));
+          } on FirebaseAuthException catch (e) {
+            print(e.code);
+          }
         },
+
         child: Text('회원가입'),
       ),
     );
