@@ -10,7 +10,7 @@ import 'package:FOOTPRINT_FLUTTER/screens/screens_register.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'firebase_option.dart';
+//import 'firebase_option.dart';
 
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -19,8 +19,8 @@ void main() async {
   await Hive.initFlutter();
   await Hive.openBox('oneDayData');
 
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  // WidgetsFlutterBinding.ensureInitialized();
+  // await Firebase.initializeApp();
   // WidgetsFlutterBinding.ensureInitialized();
   // await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
@@ -48,7 +48,7 @@ class MyApp extends StatelessWidget {
         '/register': (context) => RegisterScreen(),
         '/search': (context) => SearchScreen()
       },
-      initialRoute: '/',
+      initialRoute: '/index',
     );
   }
 }

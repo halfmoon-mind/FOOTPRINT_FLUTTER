@@ -22,9 +22,10 @@ class _SplashScreenState extends State<SplashScreen> {
     await checkLogin().then((isLogin) {
       if (isLogin) {
         Navigator.of(context).pushReplacementNamed('/index');
-      } else {
-        Navigator.of(context).pushReplacementNamed('/login');
       }
+      // else {
+      //   Navigator.of(context).pushReplacementNamed('/login');
+      // }
     });
   }
 
@@ -38,29 +39,38 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final double statusBarHeight = MediaQuery.of(context).padding.top;
     return Scaffold(
       appBar: null,
       backgroundColor: Palette.kToGreen,
-      body: Column(
-        children: [
-          SizedBox(
-            height: 320.0,
-          ),
-          Center(
-            child: Image.asset(
-              'splashscreen_icon.png',
-              width: 160.0,
-              height: 160.0,
+      body: Container(
+        padding: EdgeInsets.only(top: statusBarHeight),
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
+        alignment: Alignment.center,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            // SizedBox(
+            //   height: 320.0,
+            // ),
+            Center(
+              child: Image.asset(
+                'splashscreen_icon.png',
+                width: 160.0,
+                height: 160.0,
+              ),
             ),
-          ),
-          SizedBox(
-            height: 180.0,
-          ),
-          Center(
-            child:
-                Image.asset('splashscreen_text.png', width: 120, height: 120),
-          )
-        ],
+            const SizedBox(
+              height: 20.0,
+            ),
+            Center(
+              child:
+                  Image.asset('splashscreen_text.png', width: 120, height: 120),
+            )
+          ],
+        ),
       ),
     );
   }
