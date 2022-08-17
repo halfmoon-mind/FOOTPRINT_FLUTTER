@@ -1,4 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+//변수 만들기
+String email = "";
+String password = "";
+String nickname = "";
+String id = "";
+String password_check = "";
 
 class RegisterScreen extends StatelessWidget {
   @override
@@ -29,7 +38,9 @@ class EmailInput extends StatelessWidget {
     return Container(
       padding: EdgeInsets.fromLTRB(20, 5, 20, 5),
       child: TextField(
-        onChanged: (email) {},
+        onChanged: (value) {
+          email = value.toString().trim();
+        },
         keyboardType: TextInputType.emailAddress,
         decoration: InputDecoration(
             labelText: '이메일', helperText: '', hintText: '이메일을 입력하세요'),
@@ -44,7 +55,9 @@ class NicknameInput extends StatelessWidget {
     return Container(
       padding: EdgeInsets.fromLTRB(20, 5, 20, 5),
       child: TextField(
-        onChanged: (context) {},
+        onChanged: (value) {
+          nickname = value;
+        },
         keyboardType: TextInputType.name,
         decoration: InputDecoration(
             labelText: '닉네임', helperText: '', hintText: '닉네임을 입력하세요'),
@@ -59,7 +72,9 @@ class PasswordInput extends StatelessWidget {
     return Container(
       padding: EdgeInsets.fromLTRB(20, 5, 20, 5),
       child: TextField(
-        onChanged: (password) {},
+        onChanged: (value) {
+          password = value;
+        },
         keyboardType: TextInputType.visiblePassword,
         obscureText: true, //비밀번호 그대로 보이는거 방지
         decoration: InputDecoration(
@@ -75,7 +90,9 @@ class PasswordConfirmInput extends StatelessWidget {
     return Container(
       padding: EdgeInsets.fromLTRB(20, 5, 20, 5),
       child: TextField(
-        onChanged: (password) {},
+        onChanged: (value) {
+          password_check = value;
+        },
         keyboardType: TextInputType.visiblePassword,
         obscureText: true,
         decoration: InputDecoration(
