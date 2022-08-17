@@ -1,3 +1,4 @@
+import 'package:FOOTPRINT_FLUTTER/component/feed_body.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -33,22 +34,9 @@ List<FootprintFeed> footprintFeedList = [
       location: '위치_1',
       feedTitle: '여기는 제목 부분입니다',
       footprintUrl: 'example_footprint.png',
-      content: [
-        '첫 번째 사진에 대한 글 입니다',
-        '두 번째 사진에 대한 글 입니다',
-        '세 번째 사진에 대한 글 입니다'
-      ],
-      contentImg: [
-        'example_image.png',
-        'example_image.png',
-        'example_image.png'
-      ],
-      emotionCount: [
-        3,
-        6,
-        2
-      ]),
-
+      content: ['첫 번째 사진에 대한 글 입니다', '두 번째 사진에 대한 글 입니다', '세 번째 사진에 대한 글 입니다'],
+      contentImg: ['example_1.jpeg', 'example_1.jpeg', 'example_1.jpeg'],
+      emotionCount: [3, 6, 2]),
   FootprintFeed(
       category: '여행',
       profileImg: 'basic_profile.png',
@@ -57,18 +45,17 @@ List<FootprintFeed> footprintFeedList = [
       feedTitle: '여기는 제목 부분입니다',
       footprintUrl: 'example_footprint.png',
       content: ['첫 번째 사진에 대한 글 입니다', '두 번째 사진에 대한 글 입니다'],
-      contentImg: ['example_image.png', 'example_image.png'],
+      contentImg: ['example_2.jpeg', 'example_2.jpeg'],
       emotionCount: [5, 8, 11]),
-      
   FootprintFeed(
       category: '산책',
-      profileImg: 'basic_profile.png',
+      profileImg: 'example_4.jpeg',
       nickname: 'user_3',
       location: '위치_3',
       feedTitle: '여기는 제목 부분입니다',
       footprintUrl: 'example_footprint.png',
       content: ['첫 번째 사진에 대한 글 입니다', '두 번째 사진에 대한 글 입니다', '세 번째 사진에 대한 글 입니다'],
-      contentImg: ['example_image.png', 'example_image.png'],
+      contentImg: ['example_3.jpeg', 'example_3.jpeg'],
       emotionCount: [2, 5, 0])
 ];
 
@@ -94,7 +81,12 @@ class FeedTab extends StatelessWidget {
       ),
       body: ListView(
         children: [
-          
+          ...List.generate(
+              footprintFeedList.length,
+              (index) => Padding(
+                    padding: const EdgeInsets.only(bottom: 8.0),
+                    child: Feedbody(footprintFeed: footprintFeedList[index]),
+                  ))
         ],
       ),
     );
