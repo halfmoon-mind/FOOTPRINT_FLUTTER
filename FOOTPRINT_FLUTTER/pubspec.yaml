@@ -1,12 +1,12 @@
 name: FOOTPRINT_FLUTTER
 description: A new Flutter project.
 
-publish_to: 'none'
+publish_to: "none"
 
 version: 1.0.0+1
 
 environment:
-  sdk: '>=2.17.3 <3.0.0'
+  sdk: ">=2.17.3 <3.0.0"
 
 dependencies:
   flutter:
@@ -42,3 +42,7 @@ flutter:
     - splashscreen_text.png
     - example_image.png
     - example_footprint.png
+    - example_1.jpeg
+    - example_2.jpeg
+    - example_3.jpeg
+    - example_4.jpeg
