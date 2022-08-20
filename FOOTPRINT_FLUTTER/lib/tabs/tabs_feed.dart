@@ -8,7 +8,7 @@ class FootprintFeed {
   final String nickname;
   final String location;
   final String feedTitle;
-  final String footprintUrl;
+  final String footprintUrl; //hashtag 추가
   final List<String> content;
   final List<String> contentImg;
   final List<int> emotionCount;
@@ -32,7 +32,7 @@ List<FootprintFeed> footprintFeedList = [
       profileImg: 'basic_profile.png',
       nickname: 'user_1',
       location: '위치_1',
-      feedTitle: '여기는 제목 부분입니다',
+      feedTitle: '여기는 제목 부분입니다. 저 사진은 숭실대의 명물! 백마상이지요. 제목을 엄청 길게 만들면 어떻게 될까요?',
       footprintUrl: 'example_footprint.png',
       content: ['첫 번째 사진에 대한 글 입니다', '두 번째 사진에 대한 글 입니다', '세 번째 사진에 대한 글 입니다'],
       contentImg: ['example_1.jpeg', 'example_1.jpeg', 'example_1.jpeg'],
@@ -42,7 +42,7 @@ List<FootprintFeed> footprintFeedList = [
       profileImg: 'basic_profile.png',
       nickname: 'user_2',
       location: '위치_2',
-      feedTitle: '여기는 제목 부분입니다',
+      feedTitle: '분수대랑 베어드홀 탐험기',
       footprintUrl: 'example_footprint.png',
       content: ['첫 번째 사진에 대한 글 입니다', '두 번째 사진에 대한 글 입니다'],
       contentImg: ['example_2.jpeg', 'example_2.jpeg'],

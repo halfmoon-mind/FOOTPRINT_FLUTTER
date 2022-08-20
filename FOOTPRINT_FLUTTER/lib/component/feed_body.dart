@@ -10,6 +10,7 @@ class Feedbody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      //inkwell
       decoration: BoxDecoration(
         color: Colors.white,
         border: Border(
@@ -22,9 +23,6 @@ class Feedbody extends StatelessWidget {
             height: 10,
           ),
           _buildWriter(),
-          SizedBox(
-            height: 15,
-          ),
           _buildImage(),
           _buildTitle(),
           Divider(
@@ -69,7 +67,7 @@ class Feedbody extends StatelessWidget {
     return Visibility(
       visible: footprintFeed.contentImg != '',
       child: Padding(
-        padding: const EdgeInsets.only(left: 16, right: 16, bottom: 10),
+        padding: const EdgeInsets.only(left: 16, right: 16, bottom: 0, top: 10),
         child: Image.asset(
           footprintFeed.contentImg[0],
           height: 200,
@@ -82,21 +80,66 @@ class Feedbody extends StatelessWidget {
 
   Padding _buildTitle() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-      child: Container(
-        color: Colors.blue[100],
-        height: 50,
-      ),
-    );
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        child: Align(
+          alignment: Alignment.centerLeft,
+          child: Text(
+            footprintFeed.feedTitle,
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            textAlign: TextAlign.start,
+          ),
+        ));
   }
 
   Padding _buildEmoji(int smilecount, int heartcount, int goodcount) {
     return Padding(
-      padding: const EdgeInsets.all(16),
-      child: Container(
-        color: Colors.lime[100],
-        height: 50,
-      ),
+      padding: const EdgeInsets.all(5),
+      child: Row(children: [
+        IconButton(
+          onPressed: () {},
+          padding: EdgeInsets.fromLTRB(15.0, 15.0, 9.0, 15.0),
+          icon: Icon(
+            Icons.sentiment_satisfied_alt,
+            color: Colors.pink[100],
+            size: 25,
+          ),
+        ),
+        Text("$smilecount",
+            style: TextStyle(fontSize: 14, color: Colors.black54)),
+        SizedBox(
+          width: 6,
+        ),
+        IconButton(
+          onPressed: () {},
+          padding: EdgeInsets.fromLTRB(15.0, 15.0, 9.0, 15.0),
+          icon: Icon(
+            Icons.thumb_up_alt_outlined,
+            color: Colors.pink[100],
+            size: 23,
+          ),
+        ),
+        Text("$goodcount",
+            style: TextStyle(fontSize: 14, color: Colors.black54)),
+        SizedBox(
+          width: 6,
+        ),
+        IconButton(
+          onPressed: () {},
+          padding: EdgeInsets.fromLTRB(13.0, 15.0, 8.0, 15.0),
+          icon: Icon(
+            Icons.favorite_outline_rounded,
+            color: Colors.pink[100],
+            size: 25,
+          ),
+        ),
+        Text("$heartcount",
+            style: TextStyle(fontSize: 14, color: Colors.black54)),
+        SizedBox(
+          width: 6,
+        ),
+      ]),
     );
   }
 }
