@@ -19,16 +19,14 @@ class RegisterScreen extends StatelessWidget {
           ),
         ),
         body: SingleChildScrollView(
-          child: Expanded(
-            child: Column(
-              children: [
-                EmailInput(),
-                NicknameInput(),
-                PasswordInput(),
-                PasswordConfirmInput(),
-                RegisterButton()
-              ],
-            ),
+          child: Column(
+            children: [
+              EmailInput(),
+              NicknameInput(),
+              PasswordInput(),
+              PasswordConfirmInput(),
+              RegisterButton()
+            ],
           ),
         ));
   }
