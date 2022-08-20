@@ -7,6 +7,7 @@ import 'package:FOOTPRINT_FLUTTER/screens/screens_index.dart';
 import 'package:FOOTPRINT_FLUTTER/screens/screens_login.dart';
 import 'package:FOOTPRINT_FLUTTER/screens/screens_splash.dart';
 import 'package:FOOTPRINT_FLUTTER/screens/screens_register.dart';
+import 'package:FOOTPRINT_FLUTTER/firebase_options.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
