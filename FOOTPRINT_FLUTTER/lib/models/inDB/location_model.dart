@@ -1,5 +1,4 @@
 import 'package:hive/hive.dart';
-import 'package:json_annotation/json_annotation.dart';
 
 part 'location_model.g.dart';
 
@@ -18,7 +17,7 @@ class LocationModel {
     required this.longitude,
   });
 
-  factory LocationModel.fromJson(Map<String, dynamic> json) =>
-      _$LocationModelFromJson(json);
-  Map<String, dynamic> toJson() => _$LocationModelToJson(this);
+  // factory LocationModel.fromJson(Map<String, dynamic> json) =>
+  //     _$LocationModelFromJson(json);
+  // Map<String, dynamic> toJson() => _$LocationModelToJson(this);
 }
