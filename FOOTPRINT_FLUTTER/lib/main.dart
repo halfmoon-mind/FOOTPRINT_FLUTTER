@@ -20,8 +20,8 @@ void main() async {
   await Hive.initFlutter();
   await Hive.openBox('oneDayData');
 
-  // WidgetsFlutterBinding.ensureInitialized();
-  // await Firebase.initializeApp();
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   // WidgetsFlutterBinding.ensureInitialized();
   // await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
@@ -49,7 +49,7 @@ class MyApp extends StatelessWidget {
         '/register': (context) => RegisterScreen(),
         '/search': (context) => SearchScreen()
       },
-      initialRoute: '/index',
+      initialRoute: '/',
     );
   }
 }

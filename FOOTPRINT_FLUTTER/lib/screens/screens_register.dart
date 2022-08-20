@@ -117,25 +117,59 @@ class RegisterButton extends StatelessWidget {
           ),
         ),
         onPressed: () async {
-          try {
-            UserCredential userCredential = await FirebaseAuth.instance
-                .createUserWithEmailAndPassword(
-                    email: email, password: password);
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text('회원가입이 완료되었습니다!'),
-              ),
-            );
+          if (password != password_check || email.isEmpty || nickname.isEmpty) {
+            showDialog(
+                context: context,
+                barrierDismissible: false,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0)),
+                    title: Column(
+                      children: <Widget>[
+                        new Text("경고"),
+                      ],
+                    ),
+                    content: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: const <Widget>[
+                        Text(
+                          "비밀번호가 동일하지 않거나, 비어있는 입력칸이 있습니다!",
+                        ),
+                      ],
+                    ),
+                    actions: <Widget>[
+                      TextButton(
+                        child: new Text("확인"),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                      ),
+                    ],
+                  );
+                });
+          } else {
+            try {
+              UserCredential userCredential = await FirebaseAuth.instance
+                  .createUserWithEmailAndPassword(
+                      email: email, password: password);
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text('회원가입이 완료되었습니다!'),
+                ),
+              );
 
-            CollectionReference users =
-                FirebaseFirestore.instance.collection('user');
-            users.doc(email).set(({
-                  'uid': userCredential.user!.uid,
-                  'email': email,
-                  'nickname': nickname,
-                }));
-          } on FirebaseAuthException catch (e) {
-            print(e.code);
+              CollectionReference users =
+                  FirebaseFirestore.instance.collection('user');
+              users.doc(email).set(({
+                    'uid': userCredential.user!.uid,
+                    'email': email,
+                    'nickname': nickname,
+                  }));
+            } on FirebaseAuthException catch (e) {
+              print(e.code);
+            }
           }
         },
         child: Text('회원가입'),
