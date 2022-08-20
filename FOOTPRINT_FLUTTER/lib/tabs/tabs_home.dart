@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:FOOTPRINT_FLUTTER/models/user.dart';
+import 'package:location/location.dart';
 
 // import 'package:flutter/src/foundation/key.dart';
 // import 'package:flutter/src/widgets/framework.dart';
@@ -14,7 +15,7 @@ class HomeTab extends StatelessWidget {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setBool('isLogin', false);
     prefs.setString('UID', '');
-    print('[*] 로그인 상태 : ' + prefs.getBool('isLogin').toString());
+    print('[*] 로그인 상태 : ${prefs.getBool('isLogin').toString()}');
   }
 
   Future getUID() async {
@@ -32,6 +33,14 @@ class HomeTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     getUID();
+    //매번 로케이션 설정 저장
+    setLocationSettings(
+      useGooglePlayServices: false,
+      //10초마다 한 번씩 위치 찍음
+      interval: 10000.0,
+      accuracy: LocationAccuracy.high,
+      smallestDisplacement: 0.0,
+    );
 
     return Scaffold(
       appBar: AppBar(

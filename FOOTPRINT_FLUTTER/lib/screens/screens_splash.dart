@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:FOOTPRINT_FLUTTER/main.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:hive/hive.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -14,11 +15,12 @@ class _SplashScreenState extends State<SplashScreen> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     bool isLogin = prefs.getBool('isLogin') ?? false;
 
-    print('[*] 로그인 상태: ' + isLogin.toString());
+    print('[*] 로그인 상태: ${isLogin.toString()}');
     return isLogin;
   }
 
   void moveScreen() async {
+    await Hive.openBox('oneDay');
     await checkLogin().then((isLogin) {
       if (isLogin) {
         Navigator.of(context).pushReplacementNamed('/index');
@@ -31,7 +33,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Timer(Duration(milliseconds: 3000), () {
+    Timer(const Duration(milliseconds: 3000), () {
       moveScreen();
     });
   }

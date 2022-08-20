@@ -7,21 +7,22 @@ import 'package:FOOTPRINT_FLUTTER/screens/screens_index.dart';
 import 'package:FOOTPRINT_FLUTTER/screens/screens_login.dart';
 import 'package:FOOTPRINT_FLUTTER/screens/screens_splash.dart';
 import 'package:FOOTPRINT_FLUTTER/screens/screens_register.dart';
-import 'package:FOOTPRINT_FLUTTER/firebase_options.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:FOOTPRINT_FLUTTER/firebase_options.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:FOOTPRINT_FLUTTER/models/inDB/oneDay_model.dart';
+import 'package:FOOTPRINT_FLUTTER/models/inDB/location_model.dart';
+
 //import 'firebase_option.dart';
 
-import 'package:hive/hive.dart';
-import 'package:hive_flutter/hive_flutter.dart';
-
 void main() async {
-  await Hive.initFlutter();
-  await Hive.openBox('oneDayData');
-
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Hive.initFlutter();
+  Hive.registerAdapter(oneDayModelAdapter());
+  Hive.registerAdapter(LocationModelAdapter());
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   // WidgetsFlutterBinding.ensureInitialized();
   // await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
@@ -57,7 +58,7 @@ class MyApp extends StatelessWidget {
 class Palette {
   static const MaterialColor kToGreen = MaterialColor(
     0xFF37EEAB,
-    const <int, Color>{
+    <int, Color>{
       10: Color(0xFF80F8CC), //5%
       50: Color(0xFF61CCA5), //10%
       100: Color(0xff2cbe89), //20%

@@ -1,29 +1,28 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'oneDayData.dart';
+part of 'oneDay_model.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class oneDayDataAdapter extends TypeAdapter<oneDayData> {
+class oneDayModelAdapter extends TypeAdapter<oneDayModel> {
   @override
   final int typeId = 1;
 
   @override
-  oneDayData read(BinaryReader reader) {
+  oneDayModel read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return oneDayData(
-      (fields[0] as Map).map((dynamic k, dynamic v) =>
-          MapEntry(k as DateTime, (v as List).cast<LocationModel>())),
+    return oneDayModel(
+      (fields[0] as List).cast<LocationModel>(),
     );
   }
 
   @override
-  void write(BinaryWriter writer, oneDayData obj) {
+  void write(BinaryWriter writer, oneDayModel obj) {
     writer
       ..writeByte(1)
       ..writeByte(0)
@@ -36,7 +35,7 @@ class oneDayDataAdapter extends TypeAdapter<oneDayData> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is oneDayDataAdapter &&
+      other is oneDayModelAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

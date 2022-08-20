@@ -1,20 +1,18 @@
+import 'package:hive/hive.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'location_model.g.dart';
 
-@JsonSerializable()
+@HiveType(typeId: 2)
 class LocationModel {
-  @JsonKey(includeIfNull: false)
-  String id;
-  @JsonKey(includeIfNull: false)
+  @HiveField(0)
   DateTime timeData;
-  @JsonKey(includeIfNull: false)
+  @HiveField(1)
   double latitude;
-  @JsonKey(includeIfNull: false)
+  @HiveField(2)
   double longitude;
 
   LocationModel({
-    required this.id,
     required this.timeData,
     required this.latitude,
     required this.longitude,

@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:location/location.dart';
 
 import 'package:FOOTPRINT_FLUTTER/models/inDB/location_model.dart';
+import 'package:FOOTPRINT_FLUTTER/service/hive/oneday.dart';
 
 class ListenLocationWidget extends StatefulWidget {
   const ListenLocationWidget({super.key});
@@ -37,6 +38,8 @@ class _ListenLocationWidgetState extends State<ListenLocationWidget> {
         _error = null;
 
         _location = currentLocation;
+        oneDayDataService()
+            .addOneDayData(currentLocation.latitude, currentLocation.longitude);
       });
       await updateBackgroundNotification(
         subtitle:
