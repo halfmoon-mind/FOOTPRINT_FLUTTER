@@ -6,7 +6,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 String email = "";
 String password = "";
 String nickname = "";
-String id = "";
 String password_check = "";
 
 class RegisterScreen extends StatelessWidget {
@@ -117,12 +116,6 @@ class RegisterButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(30.0),
           ),
         ),
-        // onPressed: () {
-        //   ScaffoldMessenger.of(context)
-        //     ..hideCurrentSnackBar()
-        //     ..showSnackBar(SnackBar(content: Text('회원가입이 완료되었습니다!')));
-        //   Navigator.pop(context);
-        // },
         onPressed: () async {
           try {
             UserCredential userCredential = await FirebaseAuth.instance
@@ -139,14 +132,12 @@ class RegisterButton extends StatelessWidget {
             users.doc(email).set(({
                   'uid': userCredential.user!.uid,
                   'email': email,
-                  'id': id,
                   'nickname': nickname,
                 }));
           } on FirebaseAuthException catch (e) {
             print(e.code);
           }
         },
-
         child: Text('회원가입'),
       ),
     );
