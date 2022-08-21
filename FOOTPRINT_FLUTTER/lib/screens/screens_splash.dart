@@ -1,9 +1,11 @@
 import 'dart:async';
-
 import 'package:FOOTPRINT_FLUTTER/main.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:hive/hive.dart';
+
+import 'package:location/location.dart';
+import 'package:FOOTPRINT_FLUTTER/service/location/listen_locations.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -21,6 +23,16 @@ class _SplashScreenState extends State<SplashScreen> {
 
   void moveScreen() async {
     await Hive.openBox('oneDay');
+    //매번 로케이션 설정 저장
+    setLocationSettings(
+      useGooglePlayServices: false,
+      //10초마다 한 번씩 위치 찍음
+      interval: 10000.0,
+      accuracy: LocationAccuracy.high,
+      smallestDisplacement: 0.0,
+    );
+    ListenLocations().listenLocations();
+
     await checkLogin().then((isLogin) {
       if (isLogin) {
         Navigator.of(context).pushReplacementNamed('/index');
@@ -33,6 +45,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
+
     Timer(const Duration(milliseconds: 3000), () {
       moveScreen();
     });

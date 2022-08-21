@@ -38,18 +38,10 @@ class HomeTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     getUID();
-    //매번 로케이션 설정 저장
-    setLocationSettings(
-      useGooglePlayServices: false,
-      //10초마다 한 번씩 위치 찍음
-      interval: 10000.0,
-      accuracy: LocationAccuracy.high,
-      smallestDisplacement: 0.0,
-    );
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'FOOTPRINT',
           style: TextStyle(color: Colors.white),
         ),
@@ -131,10 +123,13 @@ class HomeTab extends StatelessWidget {
               style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
             ),
           ),
-          Container(
+          Expanded(
+            child: SingleChildScrollView(
               child: Homebody(
-            homeTabPage: HometabPage,
-          ))
+                homeTabPage: HometabPage,
+              ),
+            ),
+          ),
         ],
       ),
     );

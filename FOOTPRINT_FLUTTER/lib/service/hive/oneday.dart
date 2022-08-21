@@ -23,15 +23,13 @@ class oneDayDataService {
     } else {
       //null이라면(값이 없었다!)
       if (oneDayBox.get(boxIndex) == null) {
-        print('새로 넣어요!');
         oneDayBox.put(boxIndex, [
           LocationModel(timeData: DateTime.now(), latitude: lat, longitude: lon)
         ]);
       }
       //이미 데이터가 들어 있다면
       else {
-        print('이미 들어갔는데?!');
-        List<LocationModel> locList = oneDayBox.get(boxIndex);
+        List locList = oneDayBox.get(boxIndex);
         locList.add(LocationModel(
             timeData: DateTime.now(), latitude: lat, longitude: lon));
         oneDayBox.put(boxIndex, locList);
