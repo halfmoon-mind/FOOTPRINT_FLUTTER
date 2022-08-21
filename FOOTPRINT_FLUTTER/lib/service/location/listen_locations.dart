@@ -6,7 +6,7 @@ import 'package:FOOTPRINT_FLUTTER/service/hive/oneday.dart';
 class ListenLocations {
   StreamSubscription<LocationData>? _locationSubscription;
   LocationData? _location;
-  listenLocations() async {
+  listenLocations() {
     _locationSubscription =
         onLocationChanged(inBackground: true).handleError((dynamic err) {
       if (err is PlatformException) {
@@ -14,7 +14,7 @@ class ListenLocations {
       }
       _locationSubscription?.cancel();
       _locationSubscription = null;
-    }).listen((LocationData currentLocation) async {
+    }).listen((LocationData currentLocation) {
       _location = currentLocation;
       oneDayDataService()
           .addOneDayData(currentLocation.latitude, currentLocation.longitude);

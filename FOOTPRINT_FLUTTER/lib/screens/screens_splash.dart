@@ -23,6 +23,16 @@ class _SplashScreenState extends State<SplashScreen> {
 
   void moveScreen() async {
     await Hive.openBox('oneDay');
+    //매번 로케이션 설정 저장
+    setLocationSettings(
+      useGooglePlayServices: false,
+      //10초마다 한 번씩 위치 찍음
+      interval: 10000.0,
+      accuracy: LocationAccuracy.high,
+      smallestDisplacement: 0.0,
+    );
+    ListenLocations().listenLocations();
+
     await checkLogin().then((isLogin) {
       if (isLogin) {
         Navigator.of(context).pushReplacementNamed('/index');
@@ -35,16 +45,6 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-
-    //매번 로케이션 설정 저장
-    setLocationSettings(
-      useGooglePlayServices: false,
-      //10초마다 한 번씩 위치 찍음
-      interval: 10000.0,
-      accuracy: LocationAccuracy.high,
-      smallestDisplacement: 0.0,
-    );
-    ListenLocations().listenLocations();
 
     Timer(const Duration(milliseconds: 3000), () {
       moveScreen();
