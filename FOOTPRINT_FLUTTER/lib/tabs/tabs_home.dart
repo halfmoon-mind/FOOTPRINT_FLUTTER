@@ -123,10 +123,13 @@ class HomeTab extends StatelessWidget {
               style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
             ),
           ),
-          Container(
+          Expanded(
+            child: SingleChildScrollView(
               child: Homebody(
-            homeTabPage: HometabPage,
-          ))
+                homeTabPage: HometabPage,
+              ),
+            ),
+          ),
         ],
       ),
     );
