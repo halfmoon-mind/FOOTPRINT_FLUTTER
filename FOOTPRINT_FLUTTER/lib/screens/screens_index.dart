@@ -1,3 +1,4 @@
+import 'package:FOOTPRINT_FLUTTER/component/home_body.dart';
 import 'package:FOOTPRINT_FLUTTER/main.dart';
 import 'package:flutter/material.dart';
 import 'package:FOOTPRINT_FLUTTER/tabs/tabs_feed.dart';
@@ -15,11 +16,13 @@ class _IndexScreenState extends State<IndexScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
-       
         body: IndexedStack(
           index: _currentIndex,
-          children: [MyrecodeTab(), HomeTab(), FeedTab()],
+          children: [
+            MyrecodeTab(),
+            HomeTab(homeTabPage: HometabPage),
+            FeedTab()
+          ],
         ),
         bottomNavigationBar: BottomNavigationBar(
           items: [

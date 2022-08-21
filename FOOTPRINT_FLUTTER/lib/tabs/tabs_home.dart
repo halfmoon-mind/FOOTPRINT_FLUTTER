@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:FOOTPRINT_FLUTTER/main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -5,12 +6,16 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:FOOTPRINT_FLUTTER/models/user.dart';
 import 'package:location/location.dart';
+import 'package:FOOTPRINT_FLUTTER/component/home_body.dart';
 
 // import 'package:flutter/src/foundation/key.dart';
 // import 'package:flutter/src/widgets/framework.dart';
 String? UID;
 
 class HomeTab extends StatelessWidget {
+  final HomeTabPage homeTabPage;
+  HomeTab({Key? key, required this.homeTabPage}) : super(key: key);
+
   Future setLogout() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setBool('isLogin', false);
@@ -96,6 +101,41 @@ class HomeTab extends StatelessWidget {
             ),
           ],
         ),
+      ),
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(left: 16),
+            child: Row(
+              children: [
+                Text(
+                  'TODAY\'S FOOTPRINT',
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                ),
+                SizedBox(
+                  width: 145,
+                ),
+                IconButton(
+                  icon: Icon(CupertinoIcons.share),
+                  padding: EdgeInsets.all(0),
+                  onPressed: () {},
+                )
+              ],
+            ),
+          ),
+          homeTabPage.FootprintMap,
+          Padding(
+            padding: const EdgeInsets.only(left: 16, right: 305, top: 16),
+            child: Text(
+              'TIMELINE',
+              style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+            ),
+          ),
+          Container(
+              child: Homebody(
+            homeTabPage: HometabPage,
+          ))
+        ],
       ),
     );
   }
