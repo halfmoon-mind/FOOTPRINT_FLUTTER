@@ -72,19 +72,17 @@ class Homebody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: ListView(
-        children: [
-          ...List.generate(
-              HometabPage.time.length,
-              (index) => Padding(
-                    padding: const EdgeInsets.only(bottom: 8.0),
-                    child: buildLog(index),
-                  ))
-        ],
-      ),
-      height: 200,
-      padding: const EdgeInsets.all(16),
+    return ListView(
+      children: [
+        ...List.generate(
+            HometabPage.time.length,
+            (index) => Padding(
+                  padding: const EdgeInsets.only(bottom: 8.0),
+                  child: buildLog(index),
+                ))
+      ],
+      // ),
+      // padding: const EdgeInsets.all(16),
     );
   }
 } //로그부분 

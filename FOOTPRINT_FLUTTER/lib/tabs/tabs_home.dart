@@ -53,7 +53,7 @@ class HomeTab extends StatelessWidget {
           padding: EdgeInsets.zero,
           children: <Widget>[
             UserAccountsDrawerHeader(
-              currentAccountPicture: CircleAvatar(
+              currentAccountPicture: const CircleAvatar(
                 backgroundImage: AssetImage('basic_profile.png'),
                 backgroundColor: Colors.white,
               ),
@@ -64,7 +64,7 @@ class HomeTab extends StatelessWidget {
               },
               decoration: BoxDecoration(
                   color: Palette.kToGreen[10],
-                  borderRadius: BorderRadius.only(
+                  borderRadius: const BorderRadius.only(
                       bottomLeft: Radius.circular(40.0),
                       bottomRight: Radius.circular(40.0))),
             ),
@@ -73,7 +73,7 @@ class HomeTab extends StatelessWidget {
                 Icons.settings,
                 color: Palette.kToGreen[500],
               ),
-              title: Text('LogOut'),
+              title: const Text('LogOut'),
               onTap: () async {
                 // Navigator.of(context).pop();
                 await FirebaseAuth.instance.signOut();
@@ -86,7 +86,7 @@ class HomeTab extends StatelessWidget {
                 Icons.emoji_objects,
                 color: Palette.kToGreen[500],
               ),
-              title: Text('About FootPrint'),
+              title: const Text('About FootPrint'),
               onTap: () {
                 Navigator.of(context).pop();
               },
@@ -97,37 +97,35 @@ class HomeTab extends StatelessWidget {
       body: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.only(left: 16),
+            padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
+                const Text(
                   'TODAY\'S FOOTPRINT',
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
-                SizedBox(
-                  width: 145,
-                ),
+                // const SizedBox(
+                //   width: 145,
+                // ),
                 IconButton(
-                  icon: Icon(CupertinoIcons.share),
-                  padding: EdgeInsets.all(0),
+                  icon: const Icon(CupertinoIcons.share),
                   onPressed: () {},
                 )
               ],
             ),
           ),
           homeTabPage.FootprintMap,
-          Padding(
-            padding: const EdgeInsets.only(left: 16, right: 305, top: 16),
+          const Padding(
+            padding: EdgeInsets.only(left: 16, right: 305, top: 16),
             child: Text(
               'TIMELINE',
               style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
             ),
           ),
           Expanded(
-            child: SingleChildScrollView(
-              child: Homebody(
-                homeTabPage: HometabPage,
-              ),
+            child: Homebody(
+              homeTabPage: HometabPage,
             ),
           ),
         ],
