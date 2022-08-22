@@ -6,6 +6,10 @@
 	<string>The app needs the location</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>The app needs the location</string>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+    	<key>NSAllowsArbitraryLoads</key><true/>
+	</dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
