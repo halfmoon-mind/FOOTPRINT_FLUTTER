@@ -29,7 +29,9 @@ class _HomePageState extends State<HomePage> {
     return SafeArea(
       child: Scaffold(
         body: InAppWebView(
-          initialFile: "http://localhost:8080/assets/web/mapview.html",
+          initialUrlRequest: URLRequest(
+            url: Uri.parse("http://localhost:8080/assets/web/mapview.html"),
+          ),
         ),
       ),
     );
