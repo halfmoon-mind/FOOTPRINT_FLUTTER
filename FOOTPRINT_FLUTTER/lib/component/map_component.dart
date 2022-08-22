@@ -3,7 +3,7 @@ import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
 InAppLocalhostServer localhostServer = new InAppLocalhostServer(port: 8080);
 
-class MyApp extends StatelessWidget {
+class MapViewApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
