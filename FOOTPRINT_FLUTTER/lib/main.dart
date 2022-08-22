@@ -7,6 +7,8 @@ import 'package:FOOTPRINT_FLUTTER/screens/screens_index.dart';
 import 'package:FOOTPRINT_FLUTTER/screens/screens_login.dart';
 import 'package:FOOTPRINT_FLUTTER/screens/screens_splash.dart';
 import 'package:FOOTPRINT_FLUTTER/screens/screens_register.dart';
+import 'package:FOOTPRINT_FLUTTER/component/map_component.dart';
+import 'package:FOOTPRINT_FLUTTER/component/map_startend.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -25,7 +27,7 @@ void main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   // WidgetsFlutterBinding.ensureInitialized();
   // await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-
+  await localhostServer.start();
   runApp(MyApp());
 }
 
