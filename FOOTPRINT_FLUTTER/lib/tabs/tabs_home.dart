@@ -4,41 +4,19 @@ import 'package:FOOTPRINT_FLUTTER/main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:FOOTPRINT_FLUTTER/models/user.dart';
-import 'package:location/location.dart';
 import 'package:FOOTPRINT_FLUTTER/component/home_body.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 // import 'package:flutter/src/foundation/key.dart';
 // import 'package:flutter/src/widgets/framework.dart';
-String? UID;
+final UserDataBox = Hive.box('UserData');
 
 class HomeTab extends StatelessWidget {
   final HomeTabPage homeTabPage;
   HomeTab({Key? key, required this.homeTabPage}) : super(key: key);
 
-  Future setLogout() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setBool('isLogin', false);
-    prefs.setString('UID', '');
-    print('[*] 로그인 상태 : ${prefs.getBool('isLogin').toString()}');
-  }
-
-  Future getUID() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    UID = prefs.getString('UID');
-  }
-
-  Future<List<USER>> getUserData(UID) => FirebaseFirestore.instance
-      .collection('user')
-      .where('uid', isEqualTo: UID)
-      .get()
-      .then((snapshot) =>
-          snapshot.docs.map((doc) => USER.fromJson(doc.data())).toList());
-
   @override
   Widget build(BuildContext context) {
-    getUID();
-
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -57,8 +35,10 @@ class HomeTab extends StatelessWidget {
                 backgroundImage: AssetImage('basic_profile.png'),
                 backgroundColor: Colors.white,
               ),
-              accountName: Text('Name Example'),
-              accountEmail: Text('example@naver.com'),
+              // accountName: Text("HELLO"),
+              // accountEmail: Text("USER"),
+              accountName: Text(UserDataBox.get(0).nickname),
+              accountEmail: Text(UserDataBox.get(0).email),
               onDetailsPressed: () {
                 print('arrow click');
               },
@@ -77,7 +57,7 @@ class HomeTab extends StatelessWidget {
               onTap: () async {
                 // Navigator.of(context).pop();
                 await FirebaseAuth.instance.signOut();
-                await setLogout();
+                Hive.box('UserData').clear();
                 Navigator.of(context).pushReplacementNamed('/login');
               },
             ),

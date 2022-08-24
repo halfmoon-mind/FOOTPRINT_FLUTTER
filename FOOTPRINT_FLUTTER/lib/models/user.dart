@@ -1,33 +1,35 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class USER {
-  late String? uid;
-  late String? email;
-  late String? id;
-  late String? nickname;
+import 'package:hive_flutter/hive_flutter.dart';
 
+part 'user.g.dart';
 
-  USER({
-    this.uid,
-    this.email,
-    this.id,
-    this.nickname,
+@HiveType(typeId: 3)
+class UserModel {
+  @HiveField(0)
+  String uid;
+  @HiveField(1)
+  String email;
+  @HiveField(2)
+  String nickname;
 
+  UserModel({
+    required this.uid,
+    required this.email,
+    required this.nickname,
   });
 
   Map<String, dynamic> toJson() {
     return {
       'uid': uid,
       'email': email,
-      'id': id,
       'nickname': nickname,
     };
   }
 
-  static USER fromJson(Map<String, dynamic> json) => USER(
+  static UserModel fromJson(Map<String, dynamic> json) => UserModel(
         uid: json['uid'],
         email: json['email'],
-        id: json['id'],
         nickname: json['nickname'],
       );
 }
