@@ -13,7 +13,7 @@ class RegisterScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(
+          title: const Text(
             '회원가입',
             style: TextStyle(fontSize: 18, color: Colors.black54),
           ),
@@ -36,13 +36,13 @@ class EmailInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.fromLTRB(20, 5, 20, 5),
+      padding: const EdgeInsets.fromLTRB(20, 5, 20, 5),
       child: TextField(
         onChanged: (value) {
           email = value.toString().trim();
         },
         keyboardType: TextInputType.emailAddress,
-        decoration: InputDecoration(
+        decoration: const InputDecoration(
             labelText: '이메일', helperText: '', hintText: '이메일을 입력하세요'),
       ),
     );
@@ -59,7 +59,7 @@ class NicknameInput extends StatelessWidget {
           nickname = value;
         },
         keyboardType: TextInputType.name,
-        decoration: InputDecoration(
+        decoration: const InputDecoration(
             labelText: '닉네임', helperText: '', hintText: '닉네임을 입력하세요'),
       ),
     );
@@ -70,14 +70,14 @@ class PasswordInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.fromLTRB(20, 5, 20, 5),
+      padding: const EdgeInsets.fromLTRB(20, 5, 20, 5),
       child: TextField(
         onChanged: (value) {
           password = value;
         },
         keyboardType: TextInputType.visiblePassword,
         obscureText: true, //비밀번호 그대로 보이는거 방지
-        decoration: InputDecoration(
+        decoration: const InputDecoration(
             labelText: '비밀번호', helperText: '', hintText: '비밀번호를 입력하세요'),
       ),
     );
@@ -95,7 +95,7 @@ class PasswordConfirmInput extends StatelessWidget {
         },
         keyboardType: TextInputType.visiblePassword,
         obscureText: true,
-        decoration: InputDecoration(
+        decoration: const InputDecoration(
             labelText: '비밀번호 확인', helperText: '', hintText: '비밀번호를 재입력하세요'),
       ),
     );
@@ -153,7 +153,7 @@ class RegisterButton extends StatelessWidget {
                   .createUserWithEmailAndPassword(
                       email: email, password: password);
               ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
+                const SnackBar(
                   content: Text('회원가입이 완료되었습니다!'),
                 ),
               );
@@ -165,12 +165,13 @@ class RegisterButton extends StatelessWidget {
                     'email': email,
                     'nickname': nickname,
                   }));
+              Navigator.of(context).pushReplacementNamed('/login');
             } on FirebaseAuthException catch (e) {
               print(e.code);
             }
           }
         },
-        child: Text('회원가입'),
+        child: const Text('회원가입'),
       ),
     );
   }

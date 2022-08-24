@@ -16,6 +16,7 @@ import 'package:FOOTPRINT_FLUTTER/firebase_options.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:FOOTPRINT_FLUTTER/models/inDB/oneDay_model.dart';
 import 'package:FOOTPRINT_FLUTTER/models/inDB/location_model.dart';
+import 'package:FOOTPRINT_FLUTTER/models/user.dart';
 
 //import 'firebase_option.dart';
 
@@ -24,6 +25,7 @@ void main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(oneDayModelAdapter());
   Hive.registerAdapter(LocationModelAdapter());
+  Hive.registerAdapter(UserModelAdapter());
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   // WidgetsFlutterBinding.ensureInitialized();
   // await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);

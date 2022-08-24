@@ -1,9 +1,12 @@
 import 'package:FOOTPRINT_FLUTTER/main.dart';
 import 'package:FOOTPRINT_FLUTTER/screens/screens_index.dart';
+import 'package:FOOTPRINT_FLUTTER/screens/screens_register.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:FOOTPRINT_FLUTTER/models/user.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 // import 'package:google_sign_in/google_sign_in.dart';
 
 String email = '';
@@ -15,7 +18,7 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           '로그인',
           style: TextStyle(color: Colors.white),
         ),
@@ -27,7 +30,7 @@ class LoginScreen extends StatelessWidget {
           EmailInput(),
           PasswordInput(),
           LoginButton(),
-          Padding(
+          const Padding(
             padding: EdgeInsets.all(8.0),
             child: Divider(thickness: 1),
           ),
@@ -42,13 +45,13 @@ class EmailInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.fromLTRB(20, 5, 20, 5),
+      padding: const EdgeInsets.fromLTRB(20, 5, 20, 5),
       child: TextField(
         onChanged: (value) {
           email = value;
         },
         keyboardType: TextInputType.emailAddress,
-        decoration: InputDecoration(labelText: '이메일', helperText: ''),
+        decoration: const InputDecoration(labelText: '이메일', helperText: ''),
       ),
     );
   }
@@ -58,30 +61,29 @@ class PasswordInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.fromLTRB(20, 5, 20, 5),
+      padding: const EdgeInsets.fromLTRB(20, 5, 20, 5),
       child: TextField(
         onChanged: (value) {
           password = value;
         },
         obscureText: true, //비밀번호 그대로 보이는거 방지
-        decoration: InputDecoration(labelText: '비밀번호', helperText: ''),
+        decoration: const InputDecoration(labelText: '비밀번호', helperText: ''),
       ),
     );
   }
 }
 
 class LoginButton extends StatelessWidget {
-  Future setLogin(UID) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setBool('isLogin', true);
-    await prefs.setString('UID', UID);
-    print('[*] 로그인 상태 : ' + prefs.getBool('isLogin').toString());
-    uid = UID;
-  } //자동로그인 기능
+  Future<List<UserModel>> getUserData(UID) => FirebaseFirestore.instance
+      .collection('user')
+      .where('uid', isEqualTo: UID)
+      .get()
+      .then((snapshot) =>
+          snapshot.docs.map((doc) => UserModel.fromJson(doc.data())).toList());
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
         width: MediaQuery.of(context).size.width * 0.85,
         height: MediaQuery.of(context).size.height * 0.05,
         child: ElevatedButton(
@@ -95,15 +97,26 @@ class LoginButton extends StatelessWidget {
                 await FirebaseAuth.instance.signInWithEmailAndPassword(
                     email: email, password: password);
                 final User user = FirebaseAuth.instance.currentUser!;
-                await setLogin(user.uid).then((value) {
+                // user.
+
+                final userDataBox = Hive.box('UserData');
+                getUserData(user.uid).then((value) {
+                  print(value[0].email);
+                  final userData = UserModel(
+                    uid: value[0].uid,
+                    email: value[0].email,
+                    nickname: value[0].nickname,
+                  );
+                  userDataBox.put(0, userData);
                   Navigator.of(context).pushReplacementNamed('/index');
                 });
+
                 // Navigator.of(context).pushReplacementNamed('/index');
               } on FirebaseAuthException catch (e) {
                 showDialog(
                   context: context,
                   builder: (ctx) => AlertDialog(
-                    title: Text("로그인 실패!"),
+                    title: const Text("로그인 실패!"),
                     content: Text('${e.message}'),
                   ),
                 );
@@ -117,7 +130,7 @@ class LoginButton extends StatelessWidget {
               //   );
               // });
             },
-            child: Text('로그인')));
+            child: const Text('로그인')));
   }
 }
 
