@@ -1,3 +1,4 @@
+import 'package:FOOTPRINT_FLUTTER/screens/screen_upload.dart';
 import 'package:FOOTPRINT_FLUTTER/screens/screens_search.dart';
 import 'package:FOOTPRINT_FLUTTER/tabs/tabs_feed.dart';
 import 'package:FOOTPRINT_FLUTTER/tabs/tabs_myrecord.dart';
@@ -52,7 +53,8 @@ class MyApp extends StatelessWidget {
         '/': (context) => SplashScreen(),
         '/login': (context) => LoginScreen(),
         '/register': (context) => RegisterScreen(),
-        '/search': (context) => SearchScreen()
+        '/search': (context) => SearchScreen(),
+        '/upload': (context) => UploadScreen(),
       },
       initialRoute: '/',
     );
