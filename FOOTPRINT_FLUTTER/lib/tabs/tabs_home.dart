@@ -90,7 +90,9 @@ class HomeTab extends StatelessWidget {
                 // ),
                 IconButton(
                   icon: const Icon(CupertinoIcons.share),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/upload');
+                  },
                 )
               ],
             ),
