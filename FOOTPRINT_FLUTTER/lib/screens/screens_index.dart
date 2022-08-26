@@ -19,17 +19,17 @@ class _IndexScreenState extends State<IndexScreen> {
         body: IndexedStack(
           index: _currentIndex,
           children: [
-            MyrecodeTab(),
+            FeedTab(),
             HomeTab(homeTabPage: HometabPage),
-            FeedTab()
+            MyrecodeTab(),
           ],
         ),
         bottomNavigationBar: BottomNavigationBar(
           items: [
+            BottomNavigationBarItem(icon: Icon(Icons.subtitles), label: 'Feed'),
+            BottomNavigationBarItem(icon: Icon(Icons.pets), label: 'Home'),
             BottomNavigationBarItem(
                 icon: Icon(Icons.route), label: 'FootPrint'),
-            BottomNavigationBarItem(icon: Icon(Icons.pets), label: 'Home'),
-            BottomNavigationBarItem(icon: Icon(Icons.subtitles), label: 'Feed'),
             // BottomNavigationBarItem(icon: Icon(Icons.person), label: 'My')
           ],
           onTap: (index) {

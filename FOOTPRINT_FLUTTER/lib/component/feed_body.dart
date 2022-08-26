@@ -1,9 +1,9 @@
-import 'package:FOOTPRINT_FLUTTER/tabs/tabs_feed.dart';
 import 'package:flutter/material.dart';
 import 'package:FOOTPRINT_FLUTTER/component/image_container.dart';
+import 'package:FOOTPRINT_FLUTTER/models/feed_model.dart';
 
 class Feedbody extends StatelessWidget {
-  final FootprintFeed footprintFeed;
+  final FeedModel footprintFeed;
 
   const Feedbody({Key? key, required this.footprintFeed}) : super(key: key);
 

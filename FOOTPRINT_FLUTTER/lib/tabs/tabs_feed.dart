@@ -1,33 +1,10 @@
 import 'package:FOOTPRINT_FLUTTER/component/feed_body.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:FOOTPRINT_FLUTTER/models/feed_model.dart';
 
-class FootprintFeed {
-  final String category;
-  final String profileImg;
-  final String nickname;
-  final String location;
-  final String feedTitle;
-  final String footprintUrl; //hashtag 추가
-  final List<String> content;
-  final List<String> contentImg;
-  final List<int> emotionCount;
-
-  FootprintFeed({
-    required this.category,
-    required this.profileImg,
-    required this.nickname,
-    required this.location,
-    required this.feedTitle,
-    required this.footprintUrl,
-    required this.content,
-    required this.contentImg,
-    required this.emotionCount,
-  });
-}
-
-List<FootprintFeed> footprintFeedList = [
-  FootprintFeed(
+List<FeedModel> footprintFeedList = [
+  FeedModel(
       category: '데이트',
       profileImg: 'basic_profile.png',
       nickname: 'user_1',
@@ -37,7 +14,7 @@ List<FootprintFeed> footprintFeedList = [
       content: ['첫 번째 사진에 대한 글 입니다', '두 번째 사진에 대한 글 입니다', '세 번째 사진에 대한 글 입니다'],
       contentImg: ['example_1.jpeg', 'example_1.jpeg', 'example_1.jpeg'],
       emotionCount: [3, 6, 2]),
-  FootprintFeed(
+  FeedModel(
       category: '여행',
       profileImg: 'basic_profile.png',
       nickname: 'user_2',
@@ -47,7 +24,7 @@ List<FootprintFeed> footprintFeedList = [
       content: ['첫 번째 사진에 대한 글 입니다', '두 번째 사진에 대한 글 입니다'],
       contentImg: ['example_2.jpeg', 'example_2.jpeg'],
       emotionCount: [5, 8, 11]),
-  FootprintFeed(
+  FeedModel(
       category: '산책',
       profileImg: 'example_4.jpeg',
       nickname: 'user_3',
@@ -73,7 +50,9 @@ class FeedTab extends StatelessWidget {
         actions: [
           IconButton(
             icon: Icon(CupertinoIcons.search),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushNamed(context, '/search');
+            },
           )
         ],
         elevation: 0.0,

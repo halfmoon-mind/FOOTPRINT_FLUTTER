@@ -1,54 +1,33 @@
-import 'package:flutter/material.dart';
-import 'package:FOOTPRINT_FLUTTER/component/feed_body.dart';
-import 'package:FOOTPRINT_FLUTTER/models/feed_model.dart';
+// import 'dart:html';
+import 'package:FOOTPRINT_FLUTTER/component/map_component.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:FOOTPRINT_FLUTTER/models/inDB/init.data.dart';
 
-List<FeedModel> footprintFeedList = [
-  FeedModel(
-      category: '데이트',
-      profileImg: 'basic_profile.png',
-      nickname: 'user_1',
-      location: '위치_1',
-      feedTitle: '여기는 제목 부분입니다. 저 사진은 숭실대의 명물! 백마상이지요. 제목을 엄청 길게 만들면 어떻게 될까요?',
-      footprintUrl: 'example_footprint.png',
-      content: ['첫 번째 사진에 대한 글 입니다', '두 번째 사진에 대한 글 입니다', '세 번째 사진에 대한 글 입니다'],
-      contentImg: ['example_1.jpeg', 'example_1.jpeg', 'example_1.jpeg'],
-      emotionCount: [3, 6, 2]),
-  FeedModel(
-      category: '여행',
-      profileImg: 'basic_profile.png',
-      nickname: 'user_2',
-      location: '위치_2',
-      feedTitle: '분수대랑 베어드홀 탐험기',
-      footprintUrl: 'example_footprint.png',
-      content: ['첫 번째 사진에 대한 글 입니다', '두 번째 사진에 대한 글 입니다'],
-      contentImg: ['example_2.jpeg', 'example_2.jpeg'],
-      emotionCount: [5, 8, 11]),
-  FeedModel(
-      category: '산책',
-      profileImg: 'example_4.jpeg',
-      nickname: 'user_3',
-      location: '위치_3',
-      feedTitle: '여기는 제목 부분입니다',
-      footprintUrl: 'example_footprint.png',
-      content: ['첫 번째 사진에 대한 글 입니다', '두 번째 사진에 대한 글 입니다', '세 번째 사진에 대한 글 입니다'],
-      contentImg: ['example_3.jpeg', 'example_3.jpeg'],
-      emotionCount: [2, 5, 0])
-];
-
-class SearchScreen extends StatefulWidget {
+class UploadScreen extends StatefulWidget {
   @override
-  _SearchScreen createState() => _SearchScreen();
+  _UploadScreen createState() => _UploadScreen();
 }
 
-class _SearchScreen extends State<SearchScreen> {
+class _UploadScreen extends State<UploadScreen> {
+  String inputTitleText = '';
+  String inputDescriptionText = '';
   List locationHashtags = [];
   List typeHashtags = [];
 
-  locationSetter(List locations) {
+  locationSetter(List locations, bool isNext) {
     setState(() {
       locationHashtags = locations;
+      (isNext)
+          ? showDialog(
+              context: context,
+              builder: (_) {
+                return TypeDialog(
+                  types: typeHashtags,
+                  setter: typeSetter,
+                );
+              })
+          : null;
     });
   }
 
@@ -61,71 +40,136 @@ class _SearchScreen extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     List<Widget> hashtagList = [];
-    for (int i = 0; i < locationHashtags.length; i++) {
-      hashtagList.add(Text('#${locationHashtags[i]} '));
-    }
     for (int i = 0; i < typeHashtags.length; i++) {
       hashtagList.add(Text('#${typeHashtags[i]} '));
+    }
+    for (int i = 0; i < locationHashtags.length; i++) {
+      hashtagList.add(Text('#${locationHashtags[i]} '));
     }
 
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          '검색하기',
+          '새로운 발자국',
           style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
         ),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(10),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  ElevatedButton(
-                    onPressed: () {
-                      showDialog(
-                          context: context,
-                          builder: (_) {
-                            return LocationDialog(
-                              loc: locationHashtags,
-                              setter: locationSetter,
-                            );
-                          });
-                    },
-                    child: const SizedBox(
-                      child: Text('장소 해시태그 선택하기'),
-                    ),
-                  ),
-                  ElevatedButton(
-                    onPressed: () {
-                      showDialog(
-                          context: context,
-                          builder: (_) {
-                            return TypeDialog(
-                              types: typeHashtags,
-                              setter: typeSetter,
-                            );
-                          });
-                    },
-                    child: const SizedBox(
-                      child: Text('카테고리 해시태그 선택하기'),
-                    ),
-                  ),
-                ],
-              ),
-              Text(
-                '선택된 해시태그',
-                style: TextStyle(fontSize: 18),
-              ),
-              Wrap(children: hashtagList),
-              Feedbody(footprintFeed: footprintFeedList[0]),
-              Feedbody(footprintFeed: footprintFeedList[1]),
-              Feedbody(footprintFeed: footprintFeedList[2]),
-            ],
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text('업로드가 완료되었습니다!'),
+                  duration: Duration(seconds: 2),
+                ),
+              );
+            },
+            child: const Text(
+              '업로드',
+              style: TextStyle(
+                  fontSize: 16,
+                  color: Colors.black,
+                  fontWeight: FontWeight.w500),
+            ),
           ),
+        ],
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            SizedBox(
+              height: 300,
+              child: MapViewApp(),
+            ),
+            Padding(
+                padding: const EdgeInsets.fromLTRB(10, 15, 10, 0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text('발자국 제목'),
+                    TextField(
+                      decoration: const InputDecoration(
+                        hintText: '제목을 입력하세요',
+                        border: InputBorder.none,
+                      ),
+                      onChanged: (text) {
+                        setState(() {
+                          inputTitleText = text;
+                        });
+                      },
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text('설명'),
+                      ],
+                    ),
+                    TextField(
+                      decoration: const InputDecoration(
+                        hintText: '설명을 입력하세요',
+                        border: InputBorder.none,
+                      ),
+                      onChanged: (text) {
+                        setState(() {
+                          inputDescriptionText = text;
+                        });
+                      },
+                    ),
+                    Row(
+                      children: [
+                        ElevatedButton(
+                          onPressed: () {
+                            showDialog(
+                                context: context,
+                                builder: (_) {
+                                  return LocationDialog(
+                                    loc: locationHashtags,
+                                    setter: locationSetter,
+                                  );
+                                });
+                          },
+                          child: Text('해시태그 추가하기'),
+                        ),
+                        // Container(
+                        //   padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
+                        //   width: 224,
+                        //   child: Text(
+                        //     '#안녕하세요 #해시태그 #이런_해시태그도 #선택했나요',
+                        //     overflow: TextOverflow.clip,
+                        //   ),
+                        // ),
+                      ],
+                    ),
+                    Wrap(children: hashtagList),
+                    const Padding(
+                      padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+                      child: Text('사진'),
+                    ),
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: [
+                          const Padding(padding: EdgeInsets.only(right: 10)),
+                          Image.asset(
+                            'images/example_1.jpeg',
+                            width: 150,
+                          ),
+                          const Padding(padding: EdgeInsets.only(right: 10)),
+                          Image.asset(
+                            'images/example_1.jpeg',
+                            width: 150,
+                          ),
+                          const Padding(padding: EdgeInsets.only(right: 10)),
+                          Image.asset(
+                            'images/example_1.jpeg',
+                            width: 150,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                )),
+          ],
         ),
       ),
     );
@@ -201,7 +245,7 @@ class _LocationDialog extends State<LocationDialog> {
         TextButton(
             onPressed: () {
               Navigator.pop(context);
-              widget.setter([]);
+              widget.setter([], false);
             },
             child: const Text(
               '취소',
@@ -210,10 +254,10 @@ class _LocationDialog extends State<LocationDialog> {
         TextButton(
           onPressed: () {
             Navigator.pop(context);
-            widget.setter(locationList);
+            widget.setter(locationList, true);
           },
           child: const Text(
-            "선택",
+            "다음으로",
             style: TextStyle(color: Colors.black54),
           ),
         ),
@@ -303,7 +347,7 @@ class _TypeDialog extends State<TypeDialog> {
               widget.setter(typeList);
             },
             child: const Text(
-              "선택",
+              "완료",
               style: TextStyle(color: Colors.black54),
             )),
       ],
