@@ -14,6 +14,7 @@ class _UploadScreen extends State<UploadScreen> {
   String inputDescriptionText = '';
   List locationHashtags = [];
   List typeHashtags = [];
+  bool isChecked = true;
 
   locationSetter(List locations, bool isNext) {
     setState(() {
@@ -49,9 +50,13 @@ class _UploadScreen extends State<UploadScreen> {
 
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: const Text(
           '새로운 발자국',
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.w600,
+          ),
         ),
         actions: [
           TextButton(
@@ -82,11 +87,28 @@ class _UploadScreen extends State<UploadScreen> {
               child: MapViewApp(),
             ),
             Padding(
-                padding: const EdgeInsets.fromLTRB(10, 15, 10, 0),
+                padding: const EdgeInsets.fromLTRB(10, 0, 10, 20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text('발자국 제목'),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text('제목'),
+                        Row(
+                          children: [
+                            const Text('공개 여부'),
+                            Switch(
+                                value: isChecked,
+                                onChanged: (value) {
+                                  setState(() {
+                                    isChecked = value;
+                                  });
+                                }),
+                          ],
+                        )
+                      ],
+                    ),
                     TextField(
                       decoration: const InputDecoration(
                         hintText: '제목을 입력하세요',
@@ -98,12 +120,7 @@ class _UploadScreen extends State<UploadScreen> {
                         });
                       },
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text('설명'),
-                      ],
-                    ),
+                    const Text('설명'),
                     TextField(
                       decoration: const InputDecoration(
                         hintText: '설명을 입력하세요',
